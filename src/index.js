@@ -1,7 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable import/first */
-if (process.env.NODE_ENV !== "production") require("dotenv").config();
-
 import zlib from "zlib";
 import { spawnPgDump } from "../lib/pgdump";
 import { uploadStream } from "../lib/s3";
