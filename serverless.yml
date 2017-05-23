@@ -6,8 +6,8 @@ provider:
   name: aws
   runtime: nodejs6.10
   profile: ${env:PROFILE}
-  stage: ${opt:stage, env:STAGE, self:custom.stage}
-  region: ${opt:region, env:REGION, self:custom.region}
+  stage: ${env:STAGE, self:custom.stage}
+  region: ${env:REGION, self:custom.region}
   deploymentBucket: alphadump-deployments
   iamRoleStatements:
     - Effect: Allow
