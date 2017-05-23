@@ -138,6 +138,7 @@ Back in Users, click the user we just created.
 </pre>
 </details>
 
+
 Back in your terminal, run the following substituting the required variables:
 
 ```bash
