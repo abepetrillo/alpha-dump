@@ -1,6 +1,7 @@
-NODE_ENV=development
-S3_BUCKET=pgdump-my-awesome-db-dev
-DB_NAME=my_awesome_db
-DB_HOST=127.0.0.1
-DB_USER=
-DB_PASSWORD=
+export NODE_ENV=development
+export PROFILE=alphadump-deploy
+export S3_BUCKET=alphadump-dev
+export DB_NAME=my_awesome_db
+export DB_HOST=127.0.0.1
+export DB_USER=
+export DB_PASSWORD=

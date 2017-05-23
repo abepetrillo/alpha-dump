@@ -1,33 +1,27 @@
-service: pgdump
+service: alphadump
 
 frameworkVersion: ">=1.0.0 <2.0.0"
 
 provider:
   name: aws
   runtime: nodejs6.10
-  profile: ${opt:profile, opt:o, env:AWS_PROFILE} # Must specify always
-  stage: ${opt:stage, opt:s, env:AWS_STAGE} # Must specify always
-  region: ${opt:region, opt:r, env:AWS_REGION, self:custom.region}
-  deploymentBucket: pgdump-deployments
+  profile: ${env:PROFILE}
+  stage: ${env:STAGE, self:custom.stage}
+  region: ${env:REGION, self:custom.region}
+  deploymentBucket: alphadump-deployments
   iamRoleStatements:
     - Effect: Allow
       Action: "*"
-      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "DumpsBucket"}, "*" ] ] }
+      Resource: arn:aws:s3:::${env:S3_BUCKET}
 
 custom:
+  stage: dev
   region: us-east-1
 
 functions:
-  dump:
+  default:
     handler: src/index.default
     description: Scheduled dump of the contents of a Postgres db into an S3 bucket.
     timeout: 300
     events:
       - schedule: rate(2 minutes) # cron(0 0 * * ? *) # 00:00 hrs every day
-
-resources:
-  Resources:
-    DumpsBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: ${env:S3_BUCKET} # Must specify always
