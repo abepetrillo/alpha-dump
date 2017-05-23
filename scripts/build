@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+rm -rf build > /dev/null
+mkdir build
+cp package.json serverless.yml yarn.lock .example-env build
+cp -R src lib bin build
+node_modules/.bin/babel build --out-dir build

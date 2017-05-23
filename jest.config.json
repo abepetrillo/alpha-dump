@@ -1,0 +1,15 @@
+{
+  "moduleFileExtensions": [
+    "js"
+  ],
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "setupTestFrameworkScriptFile": "<rootDir>/tests/support/jest-setup.js",
+  "coverageDirectory": "<rootDir>/reports/coverage",
+  "globals": {},
+  "notify": false,
+  "roots": [
+    "<rootDir>/tests"
+  ]
+}
