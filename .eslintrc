@@ -1,0 +1,15 @@
+{
+  "extends": "standard",
+  "plugins": [
+    "standard",
+    "promise"
+  ],
+  "rules": {
+    "comma-dangle": "off",
+    "indent": [1, 2, { "SwitchCase": 1 }],
+    "max-len": [2, 120],
+    "no-console": "error",
+    "quotes": [2, "double"],
+    "semi": "off"
+  }
+}

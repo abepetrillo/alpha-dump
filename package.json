@@ -1,0 +1,64 @@
+{
+  "name": "serverless-pgdump",
+  "version": "0.1.0",
+  "description": "Microservice triggered on cron job that generates a Postgres database dump and uploads it as a stream to S3.",
+  "author": "AlphaSights <tech@alphasights.com>",
+  "main": "src/index.js",
+  "repository": "git@github.com:alphasights/serverless-pgdump.git",
+  "keywords": [
+    "lambda",
+    "pg",
+    "postgres",
+    "back",
+    "up",
+    "backup",
+    "dump",
+    "sls",
+    "serverless",
+    "aws",
+    "framework",
+    "service",
+    "micro",
+    "microservice",
+    "s3",
+    "stream"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 6"
+  },
+  "scripts": {
+    "build": "scripts/build",
+    "predeploy": "yarn lint && yarn test -- -b --coverage=false && yarn build",
+    "predeploy:infrastructure": "yarn predeploy",
+    "predeploy:function": "yarn predeploy",
+    "deploy:infrastructure": "cd build && yarn install --production && AWS_PROFILE=pgdump-deploy serverless deploy",
+    "deploy:function": "cd build && yarn install --production && AWS_PROFILE=pgdump-deploy serverless deploy function -f dump",
+    "lint": "eslint --ext js src",
+    "test": "jest --config jest.config.json --coverage",
+    "predev": "yarn build",
+    "invoke:local": "yarn build && AWS_PROFILE=pgdump-deploy ./scripts/invoke",
+    "invoke:prod": "AWS_PROFILE=pgdump-deploy serverless invoke -f dump",
+    "logs": "AWS_PROFILE=pgdump-deploy serverless logs -f dump",
+    "credentials": "serverless config credentials --provider aws --key $KEY --secret $SECRET --profile pgdump-deploy"
+  },
+  "dependencies": {
+    "s3-upload-stream": "^1.0.7"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.55.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^3.5.0",
+    "dotenv": "^4.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^20.0.1",
+    "serverless": "^1.13.2"
+  }
+}
